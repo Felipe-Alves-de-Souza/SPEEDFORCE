@@ -1,0 +1,70 @@
+.list {
+  max-width: 780px;
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+}
+
+.item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.25s;
+}
+
+.item.open {
+  border-color: var(--red);
+}
+
+.item h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 24px;
+  background: none;
+  border: 0;
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.chevron {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  color: var(--gold);
+  transition: transform 0.3s ease;
+}
+
+.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* animação de altura sem JS via grid-template-rows */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.open .panel {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  overflow: hidden;
+}
+
+.panelInner p {
+  padding: 0 24px 22px;
+  color: var(--muted);
+}
+

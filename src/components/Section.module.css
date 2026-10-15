@@ -1,0 +1,58 @@
+.section {
+  padding: 140px 24px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.head {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+/* badge translúcido em caixa alta */
+.kicker {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 8px 20px;
+  border: 1px solid rgba(255, 193, 7, 0.4);
+  border-radius: 999px;
+  background: rgba(255, 193, 7, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.08);
+  transition: all 0.3s ease;
+}
+
+.kicker:hover {
+  border-color: var(--red);
+  color: #fff;
+  box-shadow: 0 0 22px rgba(229, 9, 20, 0.4);
+}
+
+.title {
+  font-size: clamp(1.8rem, 3.8vw, 2.9rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.title b {
+  color: var(--gold);
+  font-weight: inherit;
+}
+
+@media (max-width: 700px) {
+  .section {
+    padding: 90px 20px;
+  }
+  .head {
+    margin-bottom: 52px;
+  }
+}

@@ -1,0 +1,167 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--header-h) + 60px) 24px 100px;
+  background:
+    linear-gradient(90deg, rgba(10, 10, 10, 0.97) 25%, rgba(10, 10, 10, 0.6) 100%),
+    linear-gradient(0deg, var(--bg) 0%, transparent 30%),
+    var(--bg-img) center / cover no-repeat;
+  overflow: hidden;
+}
+
+.inner {
+  position: relative;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 193, 7, 0.45);
+  border-radius: 999px;
+  background: rgba(255, 193, 7, 0.07);
+  backdrop-filter: blur(8px);
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: clamp(2.2rem, 4.6vw, 4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 26px;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+}
+
+.title em {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  color: var(--red);
+  text-shadow: 0 0 30px rgba(229, 9, 20, 0.65);
+}
+
+.sub {
+  max-width: 540px;
+  margin-bottom: 40px;
+  font-size: 1.2rem;
+  color: #f1f1f1;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+}
+
+/* ---------- Visual: relógio integrado ao fundo, sem card ---------- */
+.visual {
+  position: relative;
+  aspect-ratio: 16 / 11;
+}
+
+.glow {
+  position: absolute;
+  inset: 5% 0;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(229, 9, 20, 0.5), transparent 62%),
+    radial-gradient(ellipse at 70% 40%, rgba(255, 193, 7, 0.22), transparent 55%);
+  filter: blur(40px);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.smoke,
+.smoke2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(45px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.smoke {
+  width: 55%;
+  height: 55%;
+  left: -5%;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(160, 160, 160, 0.4), transparent 70%);
+  animation: drift 9s ease-in-out infinite alternate;
+}
+
+.smoke2 {
+  width: 45%;
+  height: 45%;
+  right: 0;
+  top: 0;
+  background: radial-gradient(circle, rgba(229, 9, 20, 0.45), transparent 70%);
+  animation: drift 11s ease-in-out infinite alternate-reverse;
+}
+
+/* linhas de velocidade horizontais, desvanecendo nas bordas */
+.lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0 22px,
+    rgba(255, 193, 7, 0.16) 22px 23px,
+    transparent 23px 54px,
+    rgba(229, 9, 20, 0.2) 54px 55px
+  );
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000, transparent 75%);
+  transform: skewX(-18deg);
+  animation: speed 2.5s linear infinite;
+}
+
+.watch {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* funde as bordas da foto com o fundo escuro */
+  -webkit-mask-image: radial-gradient(ellipse 72% 68% at 50% 50%, #000 45%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 68% at 50% 50%, #000 45%, transparent 100%);
+  mix-blend-mode: screen;
+  filter: saturate(1.15) contrast(1.05) drop-shadow(0 0 30px rgba(229, 9, 20, 0.5));
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-12px) scale(1.02); }
+}
+
+@keyframes pulse {
+  50% { opacity: 0.5; }
+}
+
+@keyframes drift {
+  to { transform: translate3d(30px, -25px, 0) scale(1.15); }
+}
+
+@keyframes speed {
+  to { background-position: 0 55px; }
+}
+
+@media (max-width: 960px) {
+  .inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .sub {
+    margin-inline: auto;
+  }
+  .visual {
+    order: -1;
+    max-width: 640px;
+    margin-inline: auto;
+  }
+}

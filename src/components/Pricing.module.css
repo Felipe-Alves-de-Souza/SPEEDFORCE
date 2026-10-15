@@ -1,0 +1,139 @@
+/* Borda dupla: .outer tem o 1º anel (gradiente animado); .box tem o 2º anel interno. */
+.outer {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--red), var(--gold), var(--red), var(--gold));
+  background-size: 300% 300%;
+  animation: shimmer 6s ease-in-out infinite, halo 3s ease-in-out infinite;
+}
+
+/* "máscara" que deixa só um anel fino do gradiente visível */
+.outer::before {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  border-radius: 22.5px;
+  background: var(--bg);
+}
+
+.box {
+  position: relative;
+  isolation: isolate;
+  padding: 64px 52px 52px;
+  text-align: center;
+  border-radius: 18px;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(180deg, rgba(10, 10, 10, 0.86), rgba(10, 10, 10, 0.97)) padding-box,
+    linear-gradient(135deg, var(--gold), var(--red)) border-box;
+  box-shadow: inset 0 0 60px rgba(255, 193, 7, 0.07);
+  overflow: hidden;
+}
+
+/* imagem do Flash ao fundo, bem sutil */
+.box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg-img) center top / cover no-repeat;
+  opacity: 0.35;
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 70%);
+  mask-image: linear-gradient(180deg, #000, transparent 70%);
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes halo {
+  0%, 100% { box-shadow: 0 0 40px rgba(229, 9, 20, 0.4), 0 0 90px rgba(229, 9, 20, 0.15); }
+  50% { box-shadow: 0 0 60px rgba(255, 193, 7, 0.55), 0 0 130px rgba(255, 193, 7, 0.2); }
+}
+
+.badge {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold), #ff9800);
+  color: #000;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.name {
+  margin-top: 8px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 28px;
+}
+
+.priceRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.old {
+  color: #8d8d8d;
+  font-size: 1.05rem;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(3.2rem, 9vw, 4.8rem);
+  line-height: 1.1;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(255, 193, 7, 0.55), 0 0 55px rgba(255, 140, 0, 0.35);
+}
+
+.installments {
+  color: #b8b8b8;
+  margin-bottom: 34px;
+}
+
+.perks {
+  list-style: none;
+  margin: 0 0 38px;
+  padding: 0;
+  text-align: left;
+  display: grid;
+  gap: 14px;
+}
+
+.perks li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: #e6e6e6;
+}
+
+.check {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  color: var(--gold);
+}
+
+@media (max-width: 600px) {
+  .box {
+    padding: 64px 26px 36px;
+  }
+}

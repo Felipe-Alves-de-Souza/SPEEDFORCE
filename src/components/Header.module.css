@@ -22,32 +22,44 @@
 }
 
 .logo {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.3rem;
-  letter-spacing: 0.18em;
+  display: inline-block;
+  font-family: var(--font-comic);
+  font-size: 2rem;
+  letter-spacing: 0.08em;
   color: var(--gold);
-  text-shadow: 0 0 18px rgba(255, 193, 7, 0.45);
+  -webkit-text-stroke: 1.5px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 3px 3px 0 var(--red), 5px 5px 0 var(--ink);
+  transform: skewX(-8deg);
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: skewX(-14deg) scale(1.05);
 }
 
 .links {
   display: flex;
-  gap: 32px;
+  gap: 28px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .links a {
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
+  display: inline-block;
+  font-family: var(--font-comic);
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
-  transition: color 0.2s;
+  color: #e6e6e6;
+  transition: all 0.3s ease;
 }
 
 .links a:hover {
   color: var(--gold);
+  text-shadow: 2px 2px 0 var(--red);
+  transform: translateY(-2px) rotate(-3deg);
 }
 
 @media (max-width: 860px) {

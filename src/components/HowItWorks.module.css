@@ -1,5 +1,7 @@
 .bg {
-  background: linear-gradient(180deg, var(--bg), #0f0707 50%, var(--bg));
+  background:
+    radial-gradient(circle, rgba(229, 9, 20, 0.12) 1.3px, transparent 1.8px) 0 0 / 10px 10px,
+    linear-gradient(180deg, var(--bg), #140606 50%, var(--bg));
 }
 
 .steps {
@@ -16,39 +18,47 @@
   text-align: center;
 }
 
-/* número gigante com degradê de energia; drop-shadow gera o glow no texto transparente */
+/* número gigante: degradê de energia + contorno de tinta + sombra chapada + glow */
 .number {
   display: block;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(9rem, 15vw, 13rem);
-  line-height: 1;
-  margin-bottom: 20px;
-  background: linear-gradient(180deg, #ffb300 0%, #ff6a00 40%, var(--red) 85%);
+  font-family: var(--font-comic);
+  font-size: clamp(10rem, 16vw, 14rem);
+  line-height: 0.9;
+  margin-bottom: 24px;
+  background: linear-gradient(180deg, #fff176 0%, #ffb300 30%, #ff6a00 60%, var(--red) 90%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  filter: drop-shadow(0 0 18px rgba(229, 9, 20, 0.7)) drop-shadow(0 0 45px rgba(255, 140, 0, 0.45));
+  -webkit-text-stroke: 4px var(--ink);
+  filter: drop-shadow(6px 6px 0 var(--ink)) drop-shadow(0 0 22px rgba(229, 9, 20, 0.7)) drop-shadow(0 0 50px rgba(255, 140, 0, 0.4));
+  transform: rotate(-4deg);
   transition: all 0.3s ease;
 }
 
+.step:nth-child(2) .number { transform: rotate(3deg); }
+
 .step:hover .number {
-  filter: drop-shadow(0 0 24px rgba(255, 90, 0, 0.9)) drop-shadow(0 0 60px rgba(255, 193, 7, 0.6));
-  transform: scale(1.05);
+  transform: rotate(0deg) scale(1.08);
+  filter: drop-shadow(6px 6px 0 var(--ink)) drop-shadow(0 0 30px rgba(255, 90, 0, 0.9)) drop-shadow(0 0 70px rgba(255, 193, 7, 0.6));
 }
 
 .step h3 {
-  font-size: 1.25rem;
+  display: inline-block;
+  font-size: 1.9rem;
   margin-bottom: 16px;
-  color: var(--gold);
+  padding: 2px 14px;
+  color: var(--ink);
+  background: var(--gold);
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--red);
   text-transform: uppercase;
 }
 
 .step p {
   max-width: 320px;
   margin: 0 auto;
-  color: #b8b8b8;
+  color: #c4c4c4;
   line-height: 1.8;
 }
 

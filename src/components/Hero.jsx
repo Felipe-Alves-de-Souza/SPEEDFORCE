@@ -2,8 +2,9 @@ import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import Button from './Button'
+import { Burst, Sfx } from './ComicFx'
 import watchImg from '../assets/watch.jpg'
-import bgImg from '../assets/flash-run.png'
+import bgImg from '../assets/comic-strike.jpg'
 import styles from './Hero.module.css'
 
 gsap.registerPlugin(useGSAP)
@@ -56,6 +57,8 @@ export default function Hero({ onCta, isLoaded }) {
           <div className={styles.smoke2} />
           <div className={styles.lines} />
           <img src={watchImg} alt="Smartwatch SPEEDFORCE vermelho com raios na tela" className={styles.watch} />
+          <Sfx className={styles.zoom}>ZOOM!</Sfx>
+          <Burst className={styles.burst}>NOVO!</Burst>
         </div>
       </div>
     </section>

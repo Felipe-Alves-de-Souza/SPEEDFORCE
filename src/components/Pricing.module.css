@@ -57,27 +57,37 @@
 
 .badge {
   position: absolute;
-  top: 16px;
+  top: 18px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotate(-3deg);
   white-space: nowrap;
-  padding: 8px 22px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--gold), #ff9800);
-  color: #000;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
+  padding: 4px 20px;
+  background: var(--gold);
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--red);
+  color: var(--ink);
+  font-family: var(--font-comic);
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .name {
-  margin-top: 8px;
-  font-size: 1.5rem;
+  margin-top: 18px;
+  font-size: 2.4rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
+  color: #fff;
+  -webkit-text-stroke: 1.5px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 3px 3px 0 var(--red), 5px 5px 0 var(--ink);
+}
+
+/* selo de desconto estourando para fora do card */
+.burst {
+  top: -40px;
+  right: -36px;
+  width: 140px;
 }
 
 .priceRow {
@@ -88,19 +98,24 @@
 }
 
 .old {
-  color: #8d8d8d;
-  font-size: 1.05rem;
+  color: #9a9a9a;
+  font-family: var(--font-comic);
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
   text-decoration-color: var(--red);
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 4px;
 }
 
 .price {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(3.2rem, 9vw, 4.8rem);
-  line-height: 1.1;
+  font-family: var(--font-comic);
+  font-size: clamp(4.5rem, 12vw, 7rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
   color: var(--gold);
-  text-shadow: 0 0 20px rgba(255, 193, 7, 0.55), 0 0 55px rgba(255, 140, 0, 0.35);
+  -webkit-text-stroke: 3px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 5px 5px 0 var(--red), 9px 9px 0 var(--ink), 0 0 50px rgba(255, 193, 7, 0.5);
+  transform: rotate(-3deg);
 }
 
 .installments {

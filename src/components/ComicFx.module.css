@@ -1,0 +1,87 @@
+/* ---------- Onomatopeia ---------- */
+.sfx {
+  position: absolute;
+  z-index: 3;
+  font-family: var(--font-comic);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+  -webkit-text-stroke: 2.5px var(--ink);
+  paint-order: stroke fill;
+  transform: rotate(-12deg);
+  animation: wobble 2.4s ease-in-out infinite;
+}
+
+.gold {
+  color: var(--gold);
+  text-shadow: 4px 4px 0 var(--red), 7px 7px 0 var(--ink);
+}
+
+.red {
+  color: var(--red);
+  text-shadow: 4px 4px 0 var(--gold), 7px 7px 0 var(--ink);
+}
+
+.white {
+  color: #fff;
+  text-shadow: 4px 4px 0 var(--red), 7px 7px 0 var(--ink);
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(-12deg) scale(1); }
+  50% { transform: rotate(-8deg) scale(1.08); }
+}
+
+/* ---------- Explosão / selo ---------- */
+.burst {
+  --star: polygon(50% 0%, 59% 13%, 74% 6%, 75% 22%, 92% 21%, 85% 36%, 100% 44%, 87% 54%, 96% 69%, 80% 72%,
+    79% 89%, 64% 83%, 54% 98%, 45% 85%, 30% 95%, 27% 79%, 10% 81%, 16% 65%, 1% 56%, 13% 45%, 3% 30%, 19% 27%,
+    20% 10%, 36% 15%);
+  position: absolute;
+  z-index: 3;
+  width: 120px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  background: var(--ink); /* contorno */
+  clip-path: var(--star);
+  animation: spin 8s linear infinite;
+}
+
+.burst::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  background: radial-gradient(circle, #fff3a0, var(--gold) 45%, #ff9800);
+  clip-path: var(--star);
+}
+
+.burstText {
+  position: relative;
+  font-family: var(--font-comic);
+  font-size: 1.6rem;
+  line-height: 0.95;
+  text-align: center;
+  color: var(--red);
+  -webkit-text-stroke: 1px var(--ink);
+  animation: spin 8s linear infinite reverse; /* texto fica parado enquanto a estrela gira */
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Retícula ---------- */
+.halftone {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--halftone-red);
+  -webkit-mask-image: radial-gradient(ellipse at 85% 15%, #000, transparent 60%);
+  mask-image: radial-gradient(ellipse at 85% 15%, #000, transparent 60%);
+  opacity: 0.6;
+}
+

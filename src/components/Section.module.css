@@ -1,4 +1,5 @@
 .section {
+  position: relative;
   padding: 140px 24px;
 }
 
@@ -12,35 +13,35 @@
   margin-bottom: 80px;
 }
 
-/* badge translúcido em caixa alta */
+/* caixa de narração de gibi */
 .kicker {
   display: inline-block;
-  margin-bottom: 20px;
-  padding: 8px 20px;
-  border: 1px solid rgba(255, 193, 7, 0.4);
-  border-radius: 999px;
-  background: rgba(255, 193, 7, 0.08);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: var(--gold);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.25em;
+  margin-bottom: 22px;
+  padding: 6px 18px;
+  background: var(--gold);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--red);
+  font-family: var(--font-comic);
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  box-shadow: 0 0 20px rgba(255, 193, 7, 0.08);
+  transform: rotate(-2deg);
   transition: all 0.3s ease;
 }
 
 .kicker:hover {
-  border-color: var(--red);
-  color: #fff;
-  box-shadow: 0 0 22px rgba(229, 9, 20, 0.4);
+  transform: rotate(1deg) scale(1.06);
 }
 
+/* título de capa: tinta branca, contorno preto, sombra chapada vermelha */
 .title {
-  font-size: clamp(1.8rem, 3.8vw, 2.9rem);
-  font-weight: 900;
+  font-size: clamp(2.6rem, 5.6vw, 4.4rem);
   text-transform: uppercase;
+  color: #fff;
+  -webkit-text-stroke: 2px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 4px 4px 0 var(--red), 7px 7px 0 var(--ink);
 }
 
 .title b {

@@ -1,14 +1,16 @@
 import Section from './Section'
 import Button from './Button'
+import { Burst } from './ComicFx'
 import { Check } from './Icons'
 import { pricing } from '../data/content'
-import bgImg from '../assets/flash-face.png'
+import bgImg from '../assets/comic-fire.jpg'
 import styles from './Pricing.module.css'
 
 export default function Pricing({ onBuy }) {
   return (
-    <Section id="pricing" kicker="Oferta" title={<>Garanta a sua <b>unidade</b></>}>
+    <Section id="pricing" kicker="Oferta relâmpago" title={<>Garanta a sua <b>unidade</b></>}>
       <div className={styles.outer}>
+        <Burst className={styles.burst}>-28%<br />OFF!</Burst>
         <div className={styles.box} style={{ '--bg-img': `url(${bgImg})` }}>
           <span className={styles.badge}>{pricing.badge}</span>
           <h3 className={styles.name}>{pricing.name}</h3>
@@ -25,7 +27,7 @@ export default function Pricing({ onBuy }) {
               </li>
             ))}
           </ul>
-          <Button full variant="cta" onClick={onBuy}>Comprar agora</Button>
+          <Button full variant="cta" onClick={onBuy}>Comprar agora!</Button>
         </div>
       </div>
     </Section>

@@ -2,18 +2,23 @@
   max-width: 780px;
   margin: 0 auto;
   display: grid;
-  gap: 14px;
+  gap: 22px;
 }
 
 .item {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: #161616;
+  border: 3px solid var(--ink);
   border-radius: 10px;
-  transition: border-color 0.25s;
+  box-shadow: inset 0 0 0 1px rgba(255, 193, 7, 0.3), 6px 6px 0 rgba(229, 9, 20, 0.55);
+  transition: all 0.3s ease;
+}
+
+.item:hover {
+  transform: translate(-2px, -2px);
 }
 
 .item.open {
-  border-color: var(--red);
+  box-shadow: inset 0 0 0 2px var(--gold), 8px 8px 0 var(--red);
 }
 
 .item h3 {
@@ -27,20 +32,29 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 22px 24px;
+  padding: 20px 24px;
   background: none;
   border: 0;
   color: var(--text);
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-family: var(--font-comic);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
   text-align: left;
+}
+
+.question:hover {
+  color: var(--gold);
 }
 
 .chevron {
   flex: none;
-  width: 22px;
-  height: 22px;
-  color: var(--gold);
+  width: 34px;
+  height: 34px;
+  padding: 5px;
+  color: var(--ink);
+  background: var(--gold);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
   transition: transform 0.3s ease;
 }
 

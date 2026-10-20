@@ -32,7 +32,8 @@ export default function App() {
     <>
       {!isLoaded && <Preloader onComplete={handleLoaded} />}
       <Header onCta={modal.open} />
-      <main>
+      {/* Hide main content from assistive tech while modal is open */}
+      <main aria-hidden={modal.isOpen}>
         <Hero onCta={modal.open} isLoaded={isLoaded} />
         <ComicStrip />
         <Features />

@@ -19,31 +19,39 @@ export default function App() {
   const [isLoaded, setIsLoaded] = useState(false)
   const handleLoaded = useCallback(() => setIsLoaded(true), [])
 
-  // Trava o scroll durante o preloader e libera ao concluir.
+  // Controle unificado de bloqueio de scroll (Preloader OU Modal abertos), evitando condição de corrida.
   useEffect(() => {
-    if (isLoaded) return undefined
-    document.body.style.overflow = 'hidden'
+    const shouldLockScroll = !isLoaded || modal.isOpen
+    document.body.style.overflow = shouldLockScroll ? 'hidden' : ''
     return () => {
       document.body.style.overflow = ''
     }
-  }, [isLoaded])
+  }, [isLoaded, modal.isOpen])
 
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        Pular para o conteúdo principal
+      </a>
       {!isLoaded && <Preloader onComplete={handleLoaded} />}
-      <Header onCta={modal.open} />
-      {/* Hide main content from assistive tech while modal is open */}
-      <main aria-hidden={modal.isOpen}>
-        <Hero onCta={modal.open} isLoaded={isLoaded} />
-        <ComicStrip />
-        <Features />
-        <HowItWorks />
-        <Testimonials />
-        <Pricing onBuy={modal.open} />
-        <Faq />
-      </main>
-      <Footer />
-      <WaitlistModal isOpen={modal.isOpen} onClose={modal.close} />
+      <div inert={modal.isOpen ? '' : undefined} aria-hidden={modal.isOpen}>
+        <Header onCta={modal.open} />
+        <main id="main-content" tabIndex={-1}>
+          <Hero onCta={modal.open} isLoaded={isLoaded} />
+          <ComicStrip />
+          <Features />
+          <HowItWorks />
+          <Testimonials />
+          <Pricing onBuy={modal.open} />
+          <Faq />
+        </main>
+        <Footer />
+      </div>
+      <WaitlistModal
+        isOpen={modal.isOpen}
+        onClose={modal.close}
+        dialogRef={modal.dialogRef}
+      />
     </>
   )
 }

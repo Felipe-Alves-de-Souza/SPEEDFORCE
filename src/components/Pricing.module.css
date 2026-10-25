@@ -46,13 +46,23 @@
 }
 
 @keyframes shimmer {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes halo {
-  0%, 100% { box-shadow: 0 0 40px rgba(229, 9, 20, 0.4), 0 0 90px rgba(229, 9, 20, 0.15); }
-  50% { box-shadow: 0 0 60px rgba(255, 193, 7, 0.55), 0 0 130px rgba(255, 193, 7, 0.2); }
+  0%,
+  100% {
+    box-shadow: 0 0 40px rgba(229, 9, 20, 0.4), 0 0 90px rgba(229, 9, 20, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 60px rgba(255, 193, 7, 0.55), 0 0 130px rgba(255, 193, 7, 0.2);
+  }
 }
 
 .badge {
@@ -67,14 +77,14 @@
   box-shadow: 4px 4px 0 var(--red);
   color: var(--ink);
   font-family: var(--font-comic);
-  font-size: 1.3rem;
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .name {
   margin-top: 18px;
-  font-size: 2.4rem;
+  font-size: clamp(1.85rem, 4.5vw, 2.4rem);
   text-transform: uppercase;
   margin-bottom: 24px;
   color: #fff;
@@ -83,11 +93,11 @@
   text-shadow: 3px 3px 0 var(--red), 5px 5px 0 var(--ink);
 }
 
-/* selo de desconto estourando para fora do card */
+/* selo de desconto estourando para fora do card em telas grandes, contido no mobile */
 .burst {
-  top: -40px;
-  right: -36px;
-  width: 140px;
+  top: -36px;
+  right: -24px;
+  width: clamp(96px, 20vw, 136px);
 }
 
 .priceRow {
@@ -98,7 +108,7 @@
 }
 
 .old {
-  color: #9a9a9a;
+  color: #b5b5b5;
   font-family: var(--font-comic);
   font-size: 1.6rem;
   letter-spacing: 0.05em;
@@ -108,7 +118,7 @@
 
 .price {
   font-family: var(--font-comic);
-  font-size: clamp(4.5rem, 12vw, 7rem);
+  font-size: clamp(4rem, 11vw, 7rem);
   line-height: 1;
   letter-spacing: 0.03em;
   color: var(--gold);
@@ -119,7 +129,7 @@
 }
 
 .installments {
-  color: #b8b8b8;
+  color: #c4c4c4;
   margin-bottom: 34px;
 }
 
@@ -147,8 +157,13 @@
   color: var(--gold);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+  .burst {
+    top: -28px;
+    right: 6px;
+  }
+
   .box {
-    padding: 64px 26px 36px;
+    padding: 64px 24px 36px;
   }
 }

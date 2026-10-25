@@ -1,8 +1,12 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-// VIEWMODEL — estado do Modal, com fechamento por ESC e bloqueio de scroll.
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+// VIEWMODEL — estado do Modal, com fechamento por ESC, Focus Trap e restauração de foco.
 export function useModal() {
   const [isOpen, setIsOpen] = useState(false)
+  const dialogRef = useRef(null)
 
   const open = useCallback(() => setIsOpen(true), [])
   const close = useCallback(() => setIsOpen(false), [])
@@ -10,29 +14,48 @@ export function useModal() {
   useEffect(() => {
     if (!isOpen) return undefined
 
-    const onKeyDown = (e) => {
-      if (e.key === 'Escape') close()
-    }
-    // Lock scroll while modal is open and restore previous overflow on close.
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    const previouslyFocused =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
 
-    // Preserve and restore focus: store the element that had focus when opened
-    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        close()
+        return
+      }
+
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusables = Array.from(
+          dialogRef.current.querySelectorAll(FOCUSABLE_SELECTOR),
+        )
+        if (focusables.length === 0) return
+
+        const first = focusables[0]
+        const last = focusables[focusables.length - 1]
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
 
     window.addEventListener('keydown', onKeyDown)
 
     return () => {
-      document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', onKeyDown)
-      // Try to restore focus to the previously focused element when modal closes
       try {
-        if (previouslyFocused && typeof previouslyFocused.focus === 'function') previouslyFocused.focus()
+        if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
+          previouslyFocused.focus()
+        }
       } catch {
-        // ignore focus restore errors
+        // ignora erros de restauração de foco
       }
     }
   }, [isOpen, close])
 
-  return { isOpen, open, close }
+  return { isOpen, open, close, dialogRef }
 }

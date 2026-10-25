@@ -17,11 +17,16 @@
     inset 0 0 0 2px rgba(255, 193, 7, 0.55),
     8px 8px 0 var(--red),
     8px 8px 0 4px var(--ink);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card:nth-child(2) { transform: rotate(1deg); }
-.card:nth-child(1), .card:nth-child(3) { transform: rotate(-1deg); }
+.card:nth-child(2) {
+  transform: rotate(1deg);
+}
+.card:nth-child(1),
+.card:nth-child(3) {
+  transform: rotate(-1deg);
+}
 
 .card:hover {
   transform: translateY(-5px) rotate(0deg) scale(1.02);
@@ -36,20 +41,20 @@
 .tag {
   position: absolute;
   top: -22px;
-  right: -10px;
+  right: 8px;
   font-family: var(--font-comic);
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.2rem);
   line-height: 1;
   color: var(--gold);
   -webkit-text-stroke: 2px var(--ink);
   paint-order: stroke fill;
   text-shadow: 3px 3px 0 var(--red), 5px 5px 0 var(--ink);
   transform: rotate(10deg);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .card:hover .tag {
-  transform: rotate(-6deg) scale(1.25);
+  transform: rotate(-6deg) scale(1.2);
 }
 
 .icon {
@@ -62,7 +67,7 @@
   border: 3px solid var(--ink);
   border-radius: 50%;
   box-shadow: 4px 4px 0 var(--red);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover .icon {
@@ -80,13 +85,23 @@
 }
 
 .card p {
-  color: #c4c4c4;
+  color: #d0d0d0;
   line-height: 1.7;
 }
 
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 44px;
+  }
+
+  .card:nth-child(1),
+  .card:nth-child(2),
+  .card:nth-child(3) {
+    transform: none;
+  }
+
+  .card {
+    padding: 44px 26px 32px;
   }
 }

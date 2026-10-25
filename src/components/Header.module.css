@@ -1,9 +1,9 @@
 .header {
-  position: fixed; /* sticky: permanece no topo ao rolar */
+  position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
   height: var(--header-h);
-  background: rgba(10, 10, 10, 0.7);
+  background: rgba(10, 10, 10, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 193, 7, 0.15);
@@ -18,20 +18,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 20px;
 }
 
 .logo {
   display: inline-block;
   font-family: var(--font-comic);
-  font-size: 2rem;
+  font-size: clamp(1.6rem, 4vw, 2rem);
   letter-spacing: 0.08em;
   color: var(--gold);
   -webkit-text-stroke: 1.5px var(--ink);
   paint-order: stroke fill;
   text-shadow: 3px 3px 0 var(--red), 5px 5px 0 var(--ink);
   transform: skewX(-8deg);
-  transition: all 0.3s ease;
 }
 
 .logo:hover {
@@ -53,7 +52,6 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #e6e6e6;
-  transition: all 0.3s ease;
 }
 
 .links a:hover {
@@ -62,9 +60,63 @@
   transform: translateY(-2px) rotate(-3deg);
 }
 
-@media (max-width: 860px) {
-  .links {
-    display: none;
-  }
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
+.menuBtn {
+  display: none;
+  width: 42px;
+  height: 42px;
+  padding: 8px;
+  background: var(--gold);
+  color: var(--ink);
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 var(--red);
+}
+
+@media (max-width: 860px) {
+  .nav {
+    padding: 0 16px;
+  }
+
+  .menuBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .links {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 24px 20px 28px;
+    background: rgba(14, 14, 14, 0.98);
+    border-bottom: 4px solid var(--ink);
+    box-shadow: 0 10px 0 var(--red), 0 24px 40px rgba(0, 0, 0, 0.8);
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.25s ease, visibility 0.25s ease;
+  }
+
+  .linksOpen {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .links a {
+    font-size: 1.45rem;
+    padding: 4px 12px;
+  }
+}

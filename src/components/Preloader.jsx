@@ -11,12 +11,20 @@ const BOLT_PATH = 'M58 0 L44 22 L56 26 L38 50 L50 54 L30 80 L40 83 L26 100'
 /**
  * Preloader cinematográfico:
  *  1) Rastro do Flash cruzando a tela  2) Raio caindo  3) Flash bang + remoção.
- * Chama `onComplete` quando toda a timeline termina.
+ * Chama `onComplete` quando toda a timeline termina ou quando o usuário pula a intro.
  */
 export default function Preloader({ onComplete }) {
   const root = useRef(null)
   const text = useRef(null)
   const flash = useRef(null)
+  const tlRef = useRef(null)
+
+  const handleSkip = () => {
+    if (tlRef.current) {
+      tlRef.current.kill()
+    }
+    onComplete()
+  }
 
   useGSAP(
     () => {
@@ -35,6 +43,7 @@ export default function Preloader({ onComplete }) {
       gsap.set(bolt, { autoAlpha: 0, strokeDashoffset: 1 })
 
       const tl = gsap.timeline({ onComplete })
+      tlRef.current = tl
 
       // 1. Texto aparece rápido
       tl.fromTo(
@@ -65,18 +74,35 @@ export default function Preloader({ onComplete }) {
 
   return (
     <>
-      <div ref={root} className={styles.preloader} aria-hidden="true">
-        <div className={styles.track}>
+      <div
+        ref={root}
+        className={styles.preloader}
+        role="status"
+        aria-live="polite"
+        aria-label="Carregando experiência SPEEDFORCE"
+      >
+        <div className={styles.track} aria-hidden="true">
           {[styles.glow, styles.core, styles.thin, styles.thin2].map((variant, i) => (
             <span key={i} className={`${styles.streak} ${variant}`} />
           ))}
         </div>
 
-        <p ref={text} className={styles.text}>CALIBRANDO SPEED FORCE...</p>
+        <p ref={text} className={styles.text}>
+          CALIBRANDO SPEED FORCE...
+        </p>
 
-        <svg className={styles.boltSvg} viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg
+          className={styles.boltSvg}
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
           <path className={styles.bolt} d={BOLT_PATH} pathLength="1" />
         </svg>
+
+        <button type="button" className={styles.skipBtn} onClick={handleSkip}>
+          Pular intro ⚡
+        </button>
       </div>
 
       {/* O flash fica fora do container preto para sobreviver à sua remoção */}

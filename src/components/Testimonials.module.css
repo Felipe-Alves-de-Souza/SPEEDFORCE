@@ -6,11 +6,15 @@
 
 .card {
   margin: 0;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.card:nth-child(odd) { transform: rotate(-1.5deg); }
-.card:nth-child(even) { transform: rotate(1.5deg); }
+.card:nth-child(odd) {
+  transform: rotate(-1.5deg);
+}
+.card:nth-child(even) {
+  transform: rotate(1.5deg);
+}
 
 .card:hover {
   transform: translateY(-5px) rotate(0deg);
@@ -52,7 +56,7 @@
   height: 30px;
   color: var(--gold);
   filter: drop-shadow(2px 2px 0 var(--ink)) drop-shadow(0 0 8px rgba(255, 193, 7, 0.9));
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .card:hover .star {
@@ -61,11 +65,12 @@
 
 .bubble blockquote {
   margin: 0;
-  font-family: var(--font-comic);
-  font-size: 1.6rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
   font-style: italic;
-  letter-spacing: 0.03em;
-  line-height: 1.25;
+  line-height: 1.5;
+  color: #141414;
 }
 
 .author {
@@ -103,5 +108,16 @@
 @media (max-width: 800px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .card:nth-child(odd),
+  .card:nth-child(even) {
+    transform: none;
+  }
+
+  .bubble {
+    padding: 28px 24px;
+    border-radius: 26px;
   }
 }

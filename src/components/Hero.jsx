@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import Button from './Button'
 import { Burst, Sfx } from './ComicFx'
+import { heroContent } from '../data/content'
 import watchImg from '../assets/watch.jpg'
 import bgImg from '../assets/comic-strike.jpg'
 import styles from './Hero.module.css'
@@ -36,29 +37,44 @@ export default function Hero({ onCta, isLoaded }) {
   )
 
   return (
-    <section ref={root} id="top" className={styles.hero} style={{ '--bg-img': `url(${bgImg})` }}>
+    <section
+      ref={root}
+      id="top"
+      aria-labelledby="hero-title"
+      className={styles.hero}
+      style={{ '--bg-img': `url(${bgImg})` }}
+    >
       <div className={styles.inner}>
         <div className={styles.copy}>
-          <span className={styles.eyebrow} data-reveal>Smartwatch de alta performance</span>
-          <h1 className={styles.title} data-reveal>
-            Não fique apenas correndo contra o tempo. <em>Assuma o controle.</em>
+          <span className={styles.eyebrow} data-reveal>
+            {heroContent.eyebrow}
+          </span>
+          <h1 id="hero-title" className={styles.title} data-reveal>
+            {heroContent.titleMain} <em>{heroContent.titleHighlight}</em>
           </h1>
           <p className={styles.sub} data-reveal>
-            Desperte a Speed Force que há em você com o relógio definitivo para reflexos, foco e hiperprodutividade.
+            {heroContent.subtitle}
           </p>
           <div data-reveal>
-            <Button size="lg" onClick={onCta}>Ativar minha Speed Force</Button>
+            <Button size="lg" onClick={onCta}>
+              {heroContent.ctaLabel}
+            </Button>
           </div>
         </div>
 
         <div className={styles.visual} data-reveal>
-          <div className={styles.glow} />
-          <div className={styles.smoke} />
-          <div className={styles.smoke2} />
-          <div className={styles.lines} />
-          <img src={watchImg} alt="Smartwatch SPEEDFORCE vermelho com raios na tela" className={styles.watch} />
-          <Sfx className={styles.zoom}>ZOOM!</Sfx>
-          <Burst className={styles.burst}>NOVO!</Burst>
+          <div className={styles.glow} aria-hidden="true" />
+          <div className={styles.smoke} aria-hidden="true" />
+          <div className={styles.smoke2} aria-hidden="true" />
+          <div className={styles.lines} aria-hidden="true" />
+          <img
+            src={watchImg}
+            alt={heroContent.watchAlt}
+            className={styles.watch}
+            fetchPriority="high"
+          />
+          <Sfx className={styles.zoom}>{heroContent.sfxText}</Sfx>
+          <Burst className={styles.burst}>{heroContent.burstText}</Burst>
         </div>
       </div>
     </section>

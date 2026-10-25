@@ -34,7 +34,7 @@ export default function App() {
         Pular para o conteúdo principal
       </a>
       {!isLoaded && <Preloader onComplete={handleLoaded} />}
-      <div inert={modal.isOpen ? '' : undefined} aria-hidden={modal.isOpen}>
+      <div inert={modal.isOpen} aria-hidden={modal.isOpen}>
         <Header onCta={modal.open} />
         <main id="main-content" tabIndex={-1}>
           <Hero onCta={modal.open} isLoaded={isLoaded} />

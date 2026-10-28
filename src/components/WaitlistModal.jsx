@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
 import Button from './Button'
 import { modalContent } from '../data/content'
-import { useWaitlistForm } from '../hooks/useWaitlistForm'
+import { useWaitlistViewModel } from '../viewmodel/useWaitlistViewModel'
 import styles from './WaitlistModal.module.css'
 
 export default function WaitlistModal({ isOpen, onClose, dialogRef }) {
-  const { email, error, submitted, onChange, onSubmit, reset } = useWaitlistForm()
+  const { email, error, isSuccess, isLoading, onChange, onSubmit, reset } = useWaitlistViewModel()
   const closeSuccessBtnRef = useRef(null)
 
   // limpa o formulário sempre que o modal é fechado
@@ -15,10 +15,10 @@ export default function WaitlistModal({ isOpen, onClose, dialogRef }) {
 
   // move o foco para o botão de fechar quando o formulário entra no estado de sucesso
   useEffect(() => {
-    if (isOpen && submitted && closeSuccessBtnRef.current) {
+    if (isOpen && isSuccess && closeSuccessBtnRef.current) {
       closeSuccessBtnRef.current.focus()
     }
-  }, [isOpen, submitted])
+  }, [isOpen, isSuccess])
 
   if (!isOpen) return null
 
@@ -42,7 +42,7 @@ export default function WaitlistModal({ isOpen, onClose, dialogRef }) {
           ×
         </button>
 
-        {submitted ? (
+        {isSuccess ? (
           <div className={styles.success} role="status" aria-live="polite">
             <h2 id="waitlist-title">{modalContent.successTitle}</h2>
             <p id="waitlist-desc">
@@ -74,14 +74,15 @@ export default function WaitlistModal({ isOpen, onClose, dialogRef }) {
               autoFocus
               aria-invalid={!!error}
               aria-describedby={error ? 'waitlist-error' : undefined}
+              disabled={isLoading}
             />
             {error && (
               <p id="waitlist-error" className={styles.error} role="alert">
                 {error}
               </p>
             )}
-            <Button type="submit" full>
-              {modalContent.submitLabel}
+            <Button type="submit" full disabled={isLoading}>
+              {isLoading ? 'Enviando...' : modalContent.submitLabel}
             </Button>
           </form>
         )}
